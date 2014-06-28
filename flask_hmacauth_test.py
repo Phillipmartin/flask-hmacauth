@@ -26,7 +26,7 @@ def mkapp():
             #missing rights
             "test6": {"secret": "foo"}
         })
-    hmacmgr = HmacManager(app, accountmgr)
+    hmacmgr = HmacManager(accountmgr, app)
 
     @app.route("/test")
     @hmac_auth(rights="role1")

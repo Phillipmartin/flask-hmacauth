@@ -27,7 +27,7 @@ class HmacManager(object):
     :class:`HmacManager` are not bound to specific apps, so you can create one in the
     main body of your code and then bind it to your app in a factory function.
     """
-    def __init__(self, app, account_broker, account_id=GET_ACCOUNT, signature=GET_SIGNATURE,
+    def __init__(self, account_broker, app=None, account_id=GET_ACCOUNT, signature=GET_SIGNATURE,
                  timestamp=GET_TIMESTAMP, valid_time=5, digest=hashlib.sha1):
         """
         :param app Flask application container
@@ -49,10 +49,13 @@ class HmacManager(object):
         self._valid_time = valid_time
         self._digest = digest
 
+        if app is not None:
+            self.init_app(app)
+
+    def init_app(self, app):
         app.hmac_manager = self
 
     def is_authorized(self, request_obj, required_rights):
-
         try:
             timestamp = self._timestamp(request_obj)
             assert timestamp is not None

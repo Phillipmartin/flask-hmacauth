@@ -38,6 +38,7 @@ setup(
     description='A module to simplify working with HMAC auth in Flask apps',
     py_modules   = ["flask-hmacauth"],
     long_description=read_md('README.md'),
+    zip_safe=False,
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
