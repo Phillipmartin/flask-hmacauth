@@ -38,6 +38,7 @@ setup(
     py_modules   = ["flask-hmacauth"],
     long_description=read_md('README.md'),
     zip_safe=False,
+    tests_require = ['pytest', 'flask-testing'],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
