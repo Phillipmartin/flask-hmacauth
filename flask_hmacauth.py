@@ -94,6 +94,7 @@ class HmacManager(object):
         hasher = hmac.new(secret, digestmod=self._digest)
         #TODO: do we need encode() here?
         url = urlparse.urlparse(request.url.encode())
+        #TODO: hacky.  what about POSTs without a query string?
         hasher.update(url.path + "?" + url.query)
         if request.method == "POST":
             hasher.update(request.body)
@@ -148,9 +149,11 @@ class DictAccountBroker(object):
         else:
             self.accounts = accounts
 
+    #TODO: test
     def add_accounts(self, accounts):
         self.accounts.update(accounts)
 
+    #TODO: test
     def del_accounts(self, accounts):
         if isinstance(accounts, list):
             for i in accounts:
@@ -182,6 +185,7 @@ class DictAccountBroker(object):
 
 class StaticAccountBroker(object):
 
+    #TODO: this doesn't work?
     GET_ACCOUNT = lambda x: "dummy"
 
     def __init__(self, secret=None):
@@ -205,6 +209,7 @@ def hmac_auth(rights=None):
             if current_app.hmac_manager.is_authorized(request, rights):
                 return f(*args, **kwargs)
             else:
+                #TODO: make this custom, maybe a current_app.hmac_manager.error() call?
                 abort(403)
         return update_wrapper(wrapped_function, f)
     return decorator
