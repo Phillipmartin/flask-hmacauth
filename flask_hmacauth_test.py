@@ -1,6 +1,6 @@
 
 from flask import Flask
-from flask.ext.hmacauth import DictAccountBroker, HmacManager, hmac_auth
+from flask.ext.hmacauth import DictAccountBroker, HmacManager, hmac_auth, StaticAccountBroker
 import pytest
 from flask.ext.testing import TestCase
 import time
@@ -8,7 +8,7 @@ import hashlib
 import hmac
 
 
-def mkapp():
+def mkdictapp():
     app = Flask(__name__)
     app.config['TESTING'] = True
     accountmgr = DictAccountBroker(
@@ -53,12 +53,63 @@ def mkapp():
     def test4():
         return "test4"
 
+    @app.route("/test5")
+    def test5():
+        return "test5"
+
     return app
 
+def mkstaticapp():
+    app = Flask(__name__)
+    app.config['TESTING'] = True
+    accountmgr = StaticAccountBroker(secret="supersecret")
+    hmacmgr = HmacManager(accountmgr, app, account_id=lambda x: "foo", valid_time=20)
 
-class AuthTest(TestCase):
+    @app.route("/test")
+    @hmac_auth()
+    def test():
+        return "test"
+
+    @app.route("/test1")
+    def test1():
+        return "test1"
+
+    return app
+
+class StaticAuthTest(TestCase):
     def create_app(self):
-        return mkapp()
+        return mkstaticapp()
+
+    def test_no_auth(self):
+        url = "/test1"
+        req = self.client.open(url)
+        self.assert_200(req)
+        self.assertEquals(req.data,  'test1')
+
+    def test_auth(self):
+        url = "/test?TIMESTAMP="+str(int(time.time()))+"&foo=bar"
+        sig = hmac.new("supersecret", msg=url, digestmod=hashlib.sha1).hexdigest()
+        req = self.client.open(url, headers={'X-Auth-Signature': sig})
+        self.assert_200(req)
+        self.assertEquals(req.data,  'test')
+
+    def test_bad_auth(self):
+        url = "/test?TIMESTAMP="+str(int(time.time()))+"&foo=bar"
+        sig = hmac.new("notsupersecret", msg=url, digestmod=hashlib.sha1).hexdigest()
+        req = self.client.open(url, headers={'X-Auth-Signature': sig})
+        self.assert_403(req)
+
+
+class DictAuthTest(TestCase):
+    def create_app(self):
+        return mkdictapp()
+
+    #endpoint with no auth
+    def test_no_auth(self):
+        url = "/test5"
+        req = self.client.open(url)
+        self.assert_200(req)
+        self.assertEquals(req.data,  'test5')
 
     #rights tests
     def test_rights_string(self):
