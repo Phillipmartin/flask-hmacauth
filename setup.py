@@ -27,15 +27,16 @@ class PyTest(TestCommand):
 
 setup(
     name='flask-hmacauth',
-    version='0.1',
+    version='0.2',
     requires=['flask'],
     cmdclass = {'test': PyTest},
     url='http://www.github.com/Phillipmartin/flask-hmacauth',
+    include_package_data=True,
     license='MIT',
     author='Philip Martin',
     author_email='phillip.martin@gmail.com',
     description='A module to simplify working with HMAC auth in Flask apps',
-    py_modules   = ["flask-hmacauth"],
+    py_modules   = ["flask_hmacauth"],
     long_description=read_md('README.md'),
     zip_safe=False,
     tests_require = ['pytest', 'flask-testing'],
