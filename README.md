@@ -28,10 +28,11 @@ The concept of an AccountBroker is used to separate this module from any actual 
 
     import requests
     import time
+    import hashlib
 
     path_and_query = "/api/v1/create?TIMESTAMP="+str(int(time.time()))+"&ACCOUNT_ID=admin&foo=bar"
     host = "https://example.com"
-    sig=hmac.new(";hi^897t7utf", msg=path_and_query).hexdigest()
+    sig=hmac.new(";hi^897t7utf", digestmod=hashlib.sha1, msg=path_and_query).hexdigest()
     req = requests.get(host+path_and_query, headers={'X-Auth-Signature': sig})
 
 #AccountBroker
