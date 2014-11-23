@@ -97,7 +97,12 @@ class HmacManager(object):
         #TODO: hacky.  what about POSTs without a query string?
         hasher.update(url.path + "?" + url.query)
         if request.method == "POST":
-            hasher.update(request.body)
+            #TODO: check request length before calling get_data() to avoid memory exaustion issues
+            #see http://werkzeug.pocoo.org/docs/0.9/wrappers/#werkzeug.wrappers.BaseRequest.get_data
+            #and http://stackoverflow.com/questions/10999990/get-raw-post-body-in-python-flask-regardless-of-content-type-header
+            #these parameters should be the default, but just in case things change...
+            body = request.get_data(cache=True,as_text=False, parse_form_data=False)
+            hasher.update(body)
         calculated_hash = hasher.hexdigest()
 
         try:
