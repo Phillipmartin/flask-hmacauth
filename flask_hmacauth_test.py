@@ -33,7 +33,7 @@ def mkdictapp():
     def test():
         return "test"
 
-    @app.route("/test1")
+    @app.route("/test1", methods=["GET","POST"])
     @hmac_auth(rights=["role1"])
     def test1():
         return "test1"
@@ -202,7 +202,27 @@ class DictAuthTest(TestCase):
         req = self.client.open(url, headers={'X-Auth-Signature': sig})
         self.assert_403(req)
 
-    #TODO: tests for POSTs
+    def test_post_success(self):
+        url = "/test1?TIMESTAMP="+str(int(time.time()))+"&ACCOUNT_ID=test1"
+        post_body="test=test1&test2=test3"
+        sig = hmac.new("test1secret", msg=url+post_body, digestmod=hashlib.sha1).hexdigest()
+        req = self.client.open(url, headers={'X-Auth-Signature': sig}, method="POST", data=post_body)
+        self.assert_200(req)
+
+
+    def test_post_sig_fail(self):
+        url = "/test1?TIMESTAMP="+str(int(time.time()))+"&ACCOUNT_ID=test1"
+        post_body="test=test1&test2=test3"
+        sig = hmac.new("test1secret", msg=url+post_body, digestmod=hashlib.sha1).hexdigest()
+        req = self.client.open(url, headers={'X-Auth-Signature': sig}, method="POST", data=post_body+"&test3=test4")
+        self.assert_403(req)
+
+    def test_post_missing_sig(self):
+        url = "/test1?TIMESTAMP="+str(int(time.time()))+"&ACCOUNT_ID=test1"
+        post_body="test=test1&test2=test3"
+        sig = hmac.new("test1secret", msg=url+post_body, digestmod=hashlib.sha1).hexdigest()
+        req = self.client.open(url, method="POST", data=post_body)
+        self.assert_403(req)
 
 if __name__ == '__main__':
     pytest.main()
