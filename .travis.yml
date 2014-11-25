@@ -1,8 +1,16 @@
 language: python
 python:
-    - '2.7'
-    - '2.6'
+- '2.7'
+- '2.6'
 script: python setup.py test
 install:
-    - pip install flask
-    - pip install flask-testing
+- pip install flask
+- pip install flask-testing
+deploy:
+  provider: pypi
+  user: Philip.Martin
+  password:
+    secure: c1FC64KdDEQ9GcrH97uO/Cy5EWczbiszS7qqHSBJkXdVLpMa0wC4qicbBfawmyWshRSZjiDwG8gYOzI3/7PZ6MtQSpJyrCqOS5LvM7Yvtft/+fAf8RG1CKb8QY+ikLNDLYomtf048HVBnIQWR41k0A7MuqJ5WURvNQ89ydCWT3s=
+  on:
+    tags: true
+    repo: Phillipmartin/flask-hmacauth
