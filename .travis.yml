@@ -11,6 +11,7 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y pandoc
 deploy:
+  skip_cleanup: true
   provider: pypi
   user: Philip.Martin
   password:
