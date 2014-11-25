@@ -27,7 +27,7 @@ class PyTest(TestCommand):
 
 setup(
     name='flask-hmacauth',
-    version='0.2',
+    version='0.3',
     requires=['flask'],
     cmdclass = {'test': PyTest},
     url='http://www.github.com/Phillipmartin/flask-hmacauth',

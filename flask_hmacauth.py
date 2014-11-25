@@ -93,7 +93,7 @@ class HmacManager(object):
         #hash the request URL and Body
         hasher = hmac.new(secret, digestmod=self._digest)
         #TODO: do we need encode() here?
-        url = urlparse.urlparse(request.url.encode())
+        url = urlparse.urlparse(request.url.encode(request.charset or 'utf-8'))
         #TODO: hacky.  what about POSTs without a query string?
         hasher.update(url.path + "?" + url.query)
         if request.method == "POST":
