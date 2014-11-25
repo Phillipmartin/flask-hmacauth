@@ -8,14 +8,14 @@ install:
 - pip install flask-testing
 - pip install pypandoc
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y pandoc
+- sudo apt-get update -qq
+- sudo apt-get install -y pandoc
 deploy:
   skip_cleanup: true
   provider: pypi
   user: Philip.Martin
   password:
-    secure: c1FC64KdDEQ9GcrH97uO/Cy5EWczbiszS7qqHSBJkXdVLpMa0wC4qicbBfawmyWshRSZjiDwG8gYOzI3/7PZ6MtQSpJyrCqOS5LvM7Yvtft/+fAf8RG1CKb8QY+ikLNDLYomtf048HVBnIQWR41k0A7MuqJ5WURvNQ89ydCWT3s=
+    secure: O4Gxr635dKDDH2jhcHgMbs+ynfu5fLh/YV49HmDUUCyBkjyzMJMVvyVS2zXPdaWSw8nXOx9pRZO5XyjQGBJiNT4IbMHqvdasqO4dmzOuHS9/jOpoJIlpxy0qwqha4dMydGe856Ks/mml3oOJsdgtvtQrEOq+gojDn1X59xwiurg=
   on:
     tags: true
     all_branches: true
