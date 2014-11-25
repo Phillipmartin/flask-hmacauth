@@ -17,4 +17,4 @@ deploy:
     secure: Wt9ekmCe1lSvXFzEZv6jng7R3Oi26jUDrmdZ12ymZZwcmwGKs/8OwnkURP4TVlIoPmV+hfA6Tz9LUCS/v9Jj7nvwUl4FB6OKXdoC1+vsHi8mUTJvT48pnDn+45qOmXUsn46bHuQEZUHOLGD5p490GzH/YpULPXR3TBSw3ZOH9TQ=
   on:
     tags: true
-    repo: Phillipmartin/flask-hmacauth
+    all_branches: true
