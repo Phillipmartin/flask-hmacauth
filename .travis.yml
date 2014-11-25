@@ -17,5 +17,4 @@ deploy:
   password:
     secure: c1FC64KdDEQ9GcrH97uO/Cy5EWczbiszS7qqHSBJkXdVLpMa0wC4qicbBfawmyWshRSZjiDwG8gYOzI3/7PZ6MtQSpJyrCqOS5LvM7Yvtft/+fAf8RG1CKb8QY+ikLNDLYomtf048HVBnIQWR41k0A7MuqJ5WURvNQ89ydCWT3s=
   on:
-    branch: master
     tags: true
