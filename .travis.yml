@@ -6,6 +6,10 @@ script: python setup.py test
 install:
 - pip install flask
 - pip install flask-testing
+- pip install pypandoc
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y pandoc
 deploy:
   provider: pypi
   user: Philip.Martin
