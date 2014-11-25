@@ -11,11 +11,10 @@ before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -y pandoc
 deploy:
-  skip_cleanup: true
   provider: pypi
   user: Philip.Martin
   password:
-    secure: O4Gxr635dKDDH2jhcHgMbs+ynfu5fLh/YV49HmDUUCyBkjyzMJMVvyVS2zXPdaWSw8nXOx9pRZO5XyjQGBJiNT4IbMHqvdasqO4dmzOuHS9/jOpoJIlpxy0qwqha4dMydGe856Ks/mml3oOJsdgtvtQrEOq+gojDn1X59xwiurg=
+    secure: Wt9ekmCe1lSvXFzEZv6jng7R3Oi26jUDrmdZ12ymZZwcmwGKs/8OwnkURP4TVlIoPmV+hfA6Tz9LUCS/v9Jj7nvwUl4FB6OKXdoC1+vsHi8mUTJvT48pnDn+45qOmXUsn46bHuQEZUHOLGD5p490GzH/YpULPXR3TBSw3ZOH9TQ=
   on:
     tags: true
-    all_branches: true
+    repo: Phillipmartin/flask-hmacauth
