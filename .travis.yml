@@ -12,9 +12,10 @@ before_install:
 - sudo apt-get install -y pandoc
 deploy:
   provider: pypi
+  skip_cleanup: true
   user: Philip.Martin
   password:
-    secure: Wt9ekmCe1lSvXFzEZv6jng7R3Oi26jUDrmdZ12ymZZwcmwGKs/8OwnkURP4TVlIoPmV+hfA6Tz9LUCS/v9Jj7nvwUl4FB6OKXdoC1+vsHi8mUTJvT48pnDn+45qOmXUsn46bHuQEZUHOLGD5p490GzH/YpULPXR3TBSw3ZOH9TQ=
+    secure: VfYcHf7c3p/tCpzqLktQkvbwTiD8C3Zne2DSRuAGt4YHx4j0kHega4Cif34OJDOI5nleTwhi5aSCnunFWHzONZwCjVSlyt/KgwXdVLMz6ybR39lZHXML3Mf9VekGsWzCEAm1Gg7r1ioqp/YrrM0CRt/bTsoWmhB8oa+0Neitlu4=
   on:
     tags: true
     all_branches: true
