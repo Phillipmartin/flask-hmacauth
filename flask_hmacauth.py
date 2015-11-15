@@ -13,7 +13,10 @@ from functools import update_wrapper
 import hmac
 import hashlib
 import datetime
-import urllib.parse as urlparse
+try:
+    import urlparse
+except ImportError:
+    import urllib.parse as urlparse
 
 #  simple macros where x is a request object
 GET_TIMESTAMP = lambda x: x.values.get('TIMESTAMP')
@@ -97,11 +100,11 @@ class HmacManager(object):
             return False
 
         # hash the request URL and Body
-        hasher = hmac.new(secret, digestmod=self._digest)
+        hasher = hmac.new(secret.encode(), digestmod=self._digest)
         # TODO: do we need encode() here?
         url = urlparse.urlparse(request.url.encode(request.charset or 'utf-8'))
         # TODO: hacky.  what about POSTs without a query string?
-        hasher.update(url.path + "?" + url.query)
+        hasher.update(url.path + b"?" + url.query)
         if request.method == "POST":
             # TODO: check request length before calling get_data()
             # to avoid memory exaustion issues
