@@ -7,15 +7,15 @@ import json
 import pytest
 from flask.ext.testing import LiveServerTestCase
 
-from flask_aws_hmac_auth import hmac_auth
-from flask_aws_hmac_auth.dict_account_broker import DictAccountBroker
+from flask_hmacauth import hmac_auth
+from flask_hmacauth.dict_account_broker import DictAccountBroker
 
-from flask_aws_hmac_auth.hmac_manager import HmacManager
+from flask_hmacauth.hmac_manager import HmacManager
 
 import logging
 
 logging.basicConfig()
-LOGGER = logging.getLogger("flask_aws_hmac_test")
+LOGGER = logging.getLogger("flask_hmacauth_test")
 
 
 class LiveTest(LiveServerTestCase):
