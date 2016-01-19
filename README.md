@@ -76,3 +76,11 @@ In the simple case, you just need to pass this object's constructor the flask ap
    * valid_time - number of seconds that a signed request is valid (based on the signed timestamp).  defaults to 5
    * digest - digest type, defaults to hashlib.sha1
 
+# Development
+
+## Running Tests
+
+To Run tests, you'll need to install the pytest and Flask-Testing modules from pip:
+
+   * pip install pytest
+   * pip install Flask-Testing
