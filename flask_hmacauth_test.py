@@ -16,9 +16,11 @@ from flask_hmacauth.dict_account_broker import DictAccountBroker
 
 from flask_hmacauth.hmac_manager import HmacManager
 
+import re
+
 import logging
 
-logging.basicConfig()
+logging.basicConfig(level=logging.DEBUG)
 LOGGER = logging.getLogger("flask_hmacauth_test")
 
 
@@ -166,11 +168,10 @@ class LiveTest(LiveServerTestCase):
         for signed_header in signed_headers_list:
             self.assertTrue(signed_header in default_signed_headers_list)
 
-        self.assertRegexpMatches(
-            parsed_auth_lc["signature"].strip(),
+        self.assertTrue(re.match(
             "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
-            "Signature should be a non-zero-length base64 encoded hmac signature"
-        )
+            parsed_auth_lc["signature"].strip()
+        ))
 
         # timestamp should be well-formed and not older than five seconds in the past utc (hopefully much less)
         actual_timestamp = datetime.datetime.strptime(parsed_auth_lc["timestamp"], "%Y-%m-%dT%H:%M:%SZ")
