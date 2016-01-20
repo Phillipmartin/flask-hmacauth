@@ -1,6 +1,10 @@
 from flask import Flask
 import requests
-from urllib import urlencode
+try:
+    from urllib import urlencode
+except ImportError:
+    import urllib.encode as urlencode
+
 import datetime
 import json
 
@@ -160,7 +164,7 @@ class LiveTest(LiveServerTestCase):
         signed_headers_list = parsed_auth_lc["signedheaders"]
         default_signed_headers_list = ["content-type", "host"]
         for signed_header in signed_headers_list:
-            self.assertIn(signed_header, default_signed_headers_list)
+            self.assertTrue(signed_header in default_signed_headers_list)
 
         self.assertRegexpMatches(
             parsed_auth_lc["signature"].strip(),
