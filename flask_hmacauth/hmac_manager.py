@@ -185,7 +185,7 @@ class HmacManager(object):
         :return: base64 encoded HMAC signature :type str
         """
         raw_sig =  hmac.new(
-            signing_key,
+            signing_key.encode(),
             string_to_sign.encode('utf-8'),
             hashlib.sha256
         ).digest()
