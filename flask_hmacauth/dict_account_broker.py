@@ -1,4 +1,3 @@
-__author__ = 'daslanian'
 
 
 class DictAccountBroker(object):

@@ -16,8 +16,8 @@ import logging
 from base64 import b64encode
 import json
 
-from exceptions import AuthorizationError, AuthenticationError
-from util import constant_time_compare, from_utc
+from .exceptions import AuthorizationError, AuthenticationError
+from .util import constant_time_compare, from_utc
 
 logging.basicConfig()
 LOGGER = logging.getLogger("flask_ext_aws_hmac_auth")

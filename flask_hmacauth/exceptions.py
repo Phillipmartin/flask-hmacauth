@@ -1,5 +1,3 @@
-__author__ = 'daslanian'
-
 
 class FlaskAwsHmacAuthException(Exception):
     pass

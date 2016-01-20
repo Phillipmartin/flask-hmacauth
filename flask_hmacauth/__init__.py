@@ -3,7 +3,7 @@ __author__ = 'daslanian'
 from flask import current_app, request, abort
 from functools import update_wrapper
 
-from exceptions import AuthorizationError, AuthenticationError
+from .exceptions import AuthorizationError, AuthenticationError
 
 
 def hmac_auth(rights=None):
