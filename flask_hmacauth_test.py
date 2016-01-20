@@ -130,7 +130,7 @@ class LiveTest(LiveServerTestCase):
         """
         parsed_auth = json.loads(authorization_header)
         if lowercase:
-            parsed_auth = dict((k.lower(), v) for k, v in parsed_auth.iteritems())
+            parsed_auth = dict((k.lower(), v) for k, v in parsed_auth.items())
         return parsed_auth
 
     def encode_authorization_header(self, authorization_header_dict):
@@ -153,7 +153,7 @@ class LiveTest(LiveServerTestCase):
         parsed_auth_lc = self.parse_authorization_header(new_headers["Authorization"])
 
         expected_keys_list = ["version", "apikey", "signedheaders", "signature", "timestamp"]
-        for (key, val) in parsed_auth_lc.iteritems():
+        for (key, val) in parsed_auth_lc.items():
             self.assertTrue(key.lower() in expected_keys_list)
 
         self.assertEqual(parsed_auth_lc["version"].lower(), u"HMAC4-SHA256".lower())
