@@ -66,7 +66,7 @@ class HmacManager(object):
         """
         headers = request_obj.headers
         raw_authorization = None
-        for header, value in headers.iteritems():
+        for header, value in headers.items():
             if header.lower() == "authorization":
                 raw_authorization = value
         if raw_authorization is None:
@@ -165,7 +165,7 @@ class HmacManager(object):
         :param headers: list of raw headers from the request :type list
         :param canonical_uri: canonical :type str
         """
-        headers = dict((k.lower(), v) for (k, v) in headers.iteritems())
+        headers = dict((k.lower(), v) for (k, v) in headers.items())
         signed_headers = [value.strip().lower() for value in signed_headers]
 
         # TODO remove content-type?
@@ -232,7 +232,7 @@ class HmacManager(object):
         :return: dictionary of parsed authorization fields (keys: version, apikey, signedheaders, signature, timestamp)
         """
         # parse authorization_hdr as json and return as a dict with lowercased keys
-        parsed_auth = dict((k.lower(), v) for (k, v) in json.loads(authorization_hdr).iteritems())
+        parsed_auth = dict((k.lower(), v) for (k, v) in json.loads(authorization_hdr).items())
 
         for required_key in ["version", "apikey", "signedheaders", "signature", "timestamp"]:
             if required_key not in parsed_auth:
