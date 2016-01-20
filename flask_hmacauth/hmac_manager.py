@@ -216,7 +216,7 @@ class HmacManager(object):
             {
                 "Version": self.algorithm_name,
                 "APIKey": account_id,
-                "Signature": signature,
+                "Signature": signature.decode('utf-8'),
                 "SignedHeaders": signed_headers_csv,
                 "Timestamp": timestamp,
             }
