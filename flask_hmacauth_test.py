@@ -177,7 +177,7 @@ class LiveTest(LiveServerTestCase):
         actual_timestamp = datetime.datetime.strptime(parsed_auth_lc["timestamp"], "%Y-%m-%dT%H:%M:%SZ")
         now_timestamp = datetime.datetime.utcnow()
         time_delta = now_timestamp - actual_timestamp
-        self.assertTrue(time_delta.seconds < = 5)
+        self.assertTrue(time_delta.seconds <= 5)
 
     def test_server_up_and_403_without_auth(self):
         response = requests.get(self.get_server_url() + "/authenticated")
