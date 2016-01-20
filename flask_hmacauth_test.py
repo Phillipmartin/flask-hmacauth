@@ -171,13 +171,13 @@ class LiveTest(LiveServerTestCase):
         self.assertTrue(re.match(
             "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
             parsed_auth_lc["signature"].strip()
-        ))
+        ) is not None)
 
         # timestamp should be well-formed and not older than five seconds in the past utc (hopefully much less)
         actual_timestamp = datetime.datetime.strptime(parsed_auth_lc["timestamp"], "%Y-%m-%dT%H:%M:%SZ")
         now_timestamp = datetime.datetime.utcnow()
         time_delta = now_timestamp - actual_timestamp
-        self.assertLessEqual(time_delta.seconds, 5)
+        self.assertTrue(time_delta.seconds < = 5)
 
     def test_server_up_and_403_without_auth(self):
         response = requests.get(self.get_server_url() + "/authenticated")
