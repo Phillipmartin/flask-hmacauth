@@ -150,7 +150,7 @@ class LiveTest(LiveServerTestCase):
 
         expected_keys_list = ["version", "apikey", "signedheaders", "signature", "timestamp"]
         for (key, val) in parsed_auth_lc.iteritems():
-            self.assertIn(key.lower(), expected_keys_list)
+            self.assertTrue(key.lower() in expected_keys_list)
 
         self.assertEqual(parsed_auth_lc["version"].lower(), u"HMAC4-SHA256".lower())
         self.assertEqual(parsed_auth_lc["apikey"], "valid_username")
