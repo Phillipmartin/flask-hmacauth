@@ -3,7 +3,7 @@ import requests
 try:
     from urllib import urlencode
 except ImportError:
-    import urllib.encode as urlencode
+    from urllib.parse import urlencode
 
 import datetime
 import json
